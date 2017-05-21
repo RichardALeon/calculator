@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Calculator</title>
+    <%= csrf_meta_tags %>
+
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+  </head>
+
+  <body>
+    <%= yield %>
+    <table>
+      <thead>
+        <tr><td colspan=6 id="heldValue" /></tr>
+        <tr><td id="operation"></td><td colspan=5 id="display"></td></tr>
+      </thead>
+      <tbody>
+        <tc colspan=4>
+          <tr><td colspan=4 id="backspaceButton">Backspace</td></tr>
+          <tr>
+            <td id="clearButton">C</td><td class="operationButton">**</td><td class="operationButton">sqrt</td><td class="operationButton">/</td>
+          </tr>
+          <tr>
+            <td class="number">7</td><td class="number">8</td><td class="number">9</td><td class="operationButton">*</td>
+          </tr>
+          <tr>
+            <td class="number">4</td><td class="number">5</td><td class="number">6</td><td class="operationButton">+</td>
+          </tr>
+          <tr>
+            <td class="number">1</td><td class="number">2</td><td class="number">3</td><td class="operationButton">-</td>
+          </tr>
+          <tr>
+            <td id="negate">+/-</td><td class="number">0</td><td class="number">.</td><td id="equalsButton">=</td>
+          </tr>
+        </tc>
+        <tc colspan=2>
+        </tc>
+  </body>
+</html>
