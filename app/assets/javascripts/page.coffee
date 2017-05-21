@@ -4,11 +4,23 @@
 
 $ ->
   $(document).ready ->
+    $.get('page/memory').done (result) ->
+      $("#mem_" + (i + 1)).text(result.memory[i]) for i in [0..9]
+
     $(".number").click (event) ->
       appendCharacter(event.target.innerText)
 
     $(".operationButton").click (event) ->
       setOperation(event.target.innerText)
+
+    $(".pastResult").click (event) ->
+      # if display is empty, or equals is operator
+      if ($("#display").text() == "")
+        $("#display").text(event.target.innerText)
+      else if ($("#operation").text() == "=")
+        $("#display").text(event.target.innerText)
+        $("#operation").text("")
+        $("#heldValue").text("")
 
     $("#equalsButton").click ->
       execute($("#operation").text())
@@ -61,9 +73,11 @@ $ ->
     #set result in displayValue
     $.get('page/execute', {"left":heldValue, operation, "right":displayValue}).done (result) ->
           $("#operation").text("=")
-          console.log(result)
           $("#display").text(result.result) #result
           $("#heldValue").text(heldValue + " " + operation + " " + displayValue)
+
+          $("#mem_" + (i + 1)).text(result.memory[i]) for i in [0..9]
+
 
   setOperation = (operation) ->
     if ($("#display").text() == "" || $("#display").text() == "NaN" || $("#display").text() == "Infinity")
