@@ -37,6 +37,9 @@ $ ->
 
     $("#negate").click ->
       text = $("#display").text()
+      if(text == "")
+        return
+
       if (text.indexOf("-") == -1)
         $("#display").text("-".concat(text))
       else
@@ -55,7 +58,7 @@ $ ->
       $("#display").text(character)
       $("#operation").text("")
       $("#heldValue").text("")
-    else if  ($("#display").text() == "0")
+    else if  ($("#display").text() == "0" || $("#display").text() == "NaN" || $("#display").text() == "Infinity")
       $("#display").text(character)
     else
       $("#display").text($("#display").text() + character)
@@ -64,7 +67,7 @@ $ ->
       $("#display").text("0.")
 
   execute = (operation) ->
-    if ($("#display").text() == "" || (operation != "sqrt" && $("#heldValue").text() == ""))
+    if ($("#display").text() == "" || (operation != "sqrt" && $("#heldValue").text() == "") || $("#operation").text() == "=")
       return
 
     displayValue = $("#display").text()
