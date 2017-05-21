@@ -67,7 +67,7 @@ $ ->
       $("#display").text("0.")
 
   execute = (operation) ->
-    if ($("#display").text() == "" || (operation != "sqrt" && $("#heldValue").text() == "") || $("#operation").text() == "=")
+    if ($("#display").text() == "" || (operation != "sqrt" && $("#heldValue").text() == "") || $("#operation").text() == "=" && operation != "sqrt")
       return
 
     displayValue = $("#display").text()
