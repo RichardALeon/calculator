@@ -17,7 +17,11 @@ class Calc
     when "-"
       result = leftNum - rightNum
     when "sqrt"
-      result = rightNum.sqrt(0)
+      if rightNum < 0
+        result = BigDecimal.new("NaN")
+      else
+        result = rightNum.sqrt(0)
+      end
     end
 
     return result.to_s()
