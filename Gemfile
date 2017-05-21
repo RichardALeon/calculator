@@ -31,6 +31,7 @@ gem 'jbuilder', '~> 2.5'
 # gem 'bcrypt', '~> 3.1.7'
 #use jquery
 gem 'jquery-rails', '~> 4.3.1'
+gem 'bootstrap-sass', '~> 3.3.6'
 
 gem 'coffee-script-source', '1.8.0'
 # Use Capistrano for deployment

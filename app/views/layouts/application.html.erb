@@ -9,38 +9,67 @@
   </head>
 
   <body>
-    <h1>Calculator</h1>
-    <table>
-      <thead>
-        <tr><td colspan=6 id="heldValue" /></tr>
-        <tr><td id="operation"></td><td colspan=5 id="display"></td></tr>
-      </thead>
-      <tbody>
-          <tr><td colspan=4 id="backspaceButton">Backspace</td></tr>
-          <tr>
-            <td id="clearButton">C</td><td class="operationButton">**</td><td class="operationButton">sqrt</td><td class="operationButton">/</td>
-          </tr>
-          <tr>
-            <td class="number">7</td><td class="number">8</td><td class="number">9</td><td class="operationButton">*</td>
-          </tr>
-          <tr>
-            <td class="number">4</td><td class="number">5</td><td class="number">6</td><td class="operationButton">+</td>
-          </tr>
-          <tr>
-            <td class="number">1</td><td class="number">2</td><td class="number">3</td><td class="operationButton">-</td>
-          </tr>
-          <tr>
-            <td id="negate">+/-</td><td class="number">0</td><td class="number">.</td><td id="equalsButton">=</td>
-          </tr>
-      </tbody>
-    </table>
-    <div>
-      <h1>Results</h1>
+    <div class="container">
+      <h1 class="text-center">Calculator</h1>
+
+      <div class="row">
+        <div class="col-xs-8">
+          <div class="row">
+            <div class="row">
+              <div class="bg-info col-xs-12" style="min-height: 85px; overflow-x: scroll; white-space: nowrap"><h2 id="heldValue"/></div>
+            </div>
+            <div class="row">
+              <div class="bg-warning col-xs-1" style="min-height: 85px"><h2 id="operation"/></div>
+              <div class="bg-info col-xs-11" style="min-height: 85px; overflow-x: scroll"><h2 id="display"/></div>
+            </div>
+          </div>
+          <div class="row">
+            <table class="col-xs-12">
+              <tbody>
+                  <tr><td colspan=4><button class="btn btn-block btn-warning" id="backspaceButton">Backspace</button></td></tr>
+                  <tr>
+                    <td><button id="clearButton" class="btn btn-block">C</button></td>
+                    <td><button class="operationButton btn btn-block">**</button></td>
+                    <td><button class="operationButton btn btn-block">sqrt</button></td>
+                    <td><button class="operationButton btn btn-block">/</button></td>
+                  </tr>
+                  <tr>
+                    <td><button class="number btn btn-block">7</button></td>
+                    <td><button class="number btn btn-block">8</button></td>
+                    <td><button class="number btn btn-block">9</button></td>
+                    <td><button class="operationButton btn btn-block">*</button></td>
+                  </tr>
+                  <tr>
+                    <td><button class="number btn btn-block">4</button></td>
+                    <td><button class="number btn btn-block">5</button></td>
+                    <td><button class="number btn btn-block">6</button></td>
+                    <td><button class="operationButton btn btn-block">+</button></td>
+                  </tr>
+                  <tr>
+                    <td><button class="number btn btn-block">1</button></td>
+                    <td><button class="number btn btn-block">2</button></td>
+                    <td><button class="number btn btn-block">3</button></td>
+                    <td><button class="operationButton btn btn-block">-</button></td>
+                  </tr>
+                  <tr>
+                    <td><button class="btn btn-block" id="negate">+/-</button></td>
+                    <td><button class="number btn btn-block">0</button></td>
+                    <td><button class="number btn btn-block">.</button></td>
+                    <td><button class="btn btn-block btn btn-primary" id="equalsButton">=</button></td>
+                  </tr>
+              </tbody>
+            </table>
+          </div>
+      </div>
+      <div class="col-xs-4 bg-warning" style="overflow-x: hidden">
+        <h1>Results</h1>
+        <p>Click on a result to use.</p>
         <ol>
         <% for o in 1..10 %>
-          <li class="pastResult" id="mem_<%= (11 - o) %>"/>
+          <li class="pastResult"><h3 id="mem_<%= (11 - o) %>"/></li>
         <% end %>
-      </ol>
+        </ol>
+      </div>
     </div>
   </body>
 </html>

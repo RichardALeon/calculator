@@ -5,7 +5,7 @@
 $ ->
   $(document).ready ->
     $.get('page/memory').done (result) ->
-      $("#mem_" + (i + 1)).text(result.memory[i]) for i in [0..9]
+      $("#mem_" + (i + 1)).text(result.memory[i].substring(0, 20)) for i in [0..9]
 
     $(".number").click (event) ->
       appendCharacter(event.target.innerText)
@@ -14,13 +14,12 @@ $ ->
       setOperation(event.target.innerText)
 
     $(".pastResult").click (event) ->
-      # if display is empty, or equals is operator
-      if ($("#display").text() == "")
+      if ($("#operation").text() == "=")
         $("#display").text(event.target.innerText)
-      else if ($("#operation").text() == "=")
+        $("#operation").empty()
+        $("#heldValue").empty()
+      else
         $("#display").text(event.target.innerText)
-        $("#operation").text("")
-        $("#heldValue").text("")
 
     $("#equalsButton").click ->
       execute($("#operation").text())
@@ -30,10 +29,17 @@ $ ->
       text = text.slice(0, text.length - 1)
       $("#display").text(text)
 
+    timeoutId = 0
+    $("#backspaceButton").on "mousedown", ->
+      timeoutId = setTimeout(clearDisplay, 250)
+
+    $("#backspaceButton").on "mouseup mouseleave", ->
+      clearTimeout(timeoutId)
+
     $("#clearButton").click ->
-      $("#display").text("")
-      $("#heldValue").text("")
-      $("#operation").text("")
+      $("#display").empty()
+      $("#heldValue").empty()
+      $("#operation").empty()
 
     $("#negate").click ->
       text = $("#display").text()
@@ -44,6 +50,12 @@ $ ->
         $("#display").text("-".concat(text))
       else
         $("#display").text(text.slice(1, text.length))
+
+  clearDisplay = () ->
+    $("#display").empty()
+    if ($("#operation").text() == "=")
+      $("#operation").empty()
+      $("#heldValue").empty()
 
   appendCharacter = (character) ->
     if (character == ".")
@@ -56,8 +68,8 @@ $ ->
 
     if ($("#operation").text() == "=")
       $("#display").text(character)
-      $("#operation").text("")
-      $("#heldValue").text("")
+      $("#operation").empty()
+      $("#heldValue").empty()
     else if  ($("#display").text() == "0" || $("#display").text() == "NaN" || $("#display").text() == "Infinity")
       $("#display").text(character)
     else
@@ -79,7 +91,7 @@ $ ->
           $("#display").text(result.result) #result
           $("#heldValue").text(heldValue + " " + operation + " " + displayValue)
 
-          $("#mem_" + (i + 1)).text(result.memory[i]) for i in [0..9]
+          $("#mem_" + (i + 1)).text(result.memory[i].substring(0, 20)) for i in [0..9]
 
 
   setOperation = (operation) ->
@@ -87,11 +99,11 @@ $ ->
       return
 
     if (operation == "sqrt")
-      $("#heldValue").text("")
+      $("#heldValue").empty()
       execute(operation)
     else if ($("#operation").text() != "" && $("#operation").text() != "=")
       $("#operation").text(operation)
     else
       $("#heldValue").text($("#display").text())
-      $("#display").text("")
+      $("#display").empty()
       $("#operation").text(operation)
